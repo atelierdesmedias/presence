@@ -5,7 +5,7 @@ Various project used at Atelier des Médias
 
 ## Wifiscan.php
 ==
-Scan the number of connections to a freebox
+Scan the number of connections to a neufbox
 
 You need to update the user/password info 
 
