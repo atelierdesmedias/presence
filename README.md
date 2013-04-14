@@ -1,10 +1,21 @@
-# Adm
-===
+# About
+=======
 
-Various project used at Atelier des Médias
+Application used at Atelier des Médias to gather various statistics about people at the office and display then.
 
+## NetworkStat
+=============
+
+Android application getting Wifi logs from neufbox server and sending then to Atelier des Medias remote server.
+
+## UI
+====
+
+Receive and store log in the database and display then.
+
+# Resources
+===========
 ## Wifiscan.php
-==
 Scan the number of connections to a neufbox
 
 You need to update the user/password info 
