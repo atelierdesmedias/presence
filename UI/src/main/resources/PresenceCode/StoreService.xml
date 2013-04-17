@@ -11,12 +11,11 @@
   <author>xwiki:XWiki.Admin</author>
   <customClass/>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <creationDate>1365943180000</creationDate>
-  <date>1365945426000</date>
-  <contentUpdateDate>1365945426000</contentUpdateDate>
+  <creationDate>1366201903000</creationDate>
+  <date>1366213256000</date>
+  <contentUpdateDate>1366213256000</contentUpdateDate>
   <version>1.1</version>
-  <title/>
-  <template/>
+  <title>Wifi statistics storage service</title>
   <defaultTemplate/>
   <validationScript/>
   <comment/>
@@ -28,15 +27,16 @@ import groovy.sql.Sql
 
 if (xcontext.action == 'get') {
   if (request.datetime) {
-    Date datetime = new Date(Long.valueof(request.datetime));
+    Date datetime = new Date(Long.valueOf(request.datetime));
 
-    def logs = new XmlParser().parse(request.inputStream);
+    def rsp = new XmlParser().parse(request.inputStream);
 
-    if (logs.elements.size() &gt; 0) {
+    if (rsp.host.size() &gt; 0) {
       sql = Sql.newInstance('jdbc:mysql://localhost/xwiki', 'xwiki', 'xwiki', 'com.mysql.jdbc.Driver');
-      for (element in logs.elements) {
-        def mac = Integer.valueOf(element.replaceAll("[:-\\.]", ""), 16)
+      for (host in rsp.host) {
+        def mac = Long.parseLong(host.'@mac'.replaceAll('[:-]', ''), 16)
         sql.execute('insert into adm_presence_stat (mac, datetime) values (?, ?)', [mac, datetime])
+        println ("* $mac $datetime")
       }
       sql.close();
     }

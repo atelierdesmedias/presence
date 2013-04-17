@@ -1,6 +1,7 @@
 package org.atelierdesmedias.networkstat;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpHost;
@@ -13,7 +14,7 @@ import org.apache.http.auth.AuthState;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.auth.BasicScheme;
@@ -22,15 +23,16 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
-import android.os.IBinder;
 import android.util.Log;
 
-public class NetworkStatService extends Service {
+public class NetworkStatService extends IntentService {
 	private HttpRequestInterceptor preemptiveAuth;
 
 	public NetworkStatService() {
+		super(NetworkStatService.class.getName());
+
 		// Prepare preemptive filter
 		this.preemptiveAuth = new HttpRequestInterceptor() {
 			public void process(final HttpRequest request,
@@ -57,12 +59,7 @@ public class NetworkStatService extends Service {
 	}
 
 	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
-	}
-
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
+	protected void onHandleIntent(Intent intent) {
 		// ////////////////////////
 		// Get stats
 		// ////////////////////////
@@ -74,7 +71,7 @@ public class NetworkStatService extends Service {
 			Log.e(NetworkStatService.class.toString(),
 					"Faile to get host list: ", e);
 
-			return START_STICKY;
+			return;
 		}
 
 		// ////////////////////////
@@ -93,8 +90,9 @@ public class NetworkStatService extends Service {
 			adminClient.addRequestInterceptor(preemptiveAuth, 0);
 
 			// TODO: make the URL configurable
-			HttpPut put = new HttpPut(
-					"http://intra.atelier-medias.org/xwiki/bin/view/PresenceCode/StoreService");
+			HttpPost put = new HttpPost(
+					"http://xwiki.atelier-medias.org/xwiki/bin/get/PresenceCode/StoreService?datetime="
+							+ new Date().getTime());
 
 			put.setEntity(new ByteArrayEntity(stats));
 
@@ -112,7 +110,5 @@ public class NetworkStatService extends Service {
 			Log.e(NetworkStatService.class.toString(),
 					"Failed to send host list: ", e);
 		}
-
-		return START_STICKY;
 	}
 }
