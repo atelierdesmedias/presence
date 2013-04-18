@@ -13,6 +13,11 @@ Android application getting Wifi logs from neufbox server and sending then to At
 
 Receive and store log in the database and display then.
 
+* PresenceCode.StoreService: receive and store wifi statistics in the xwiki.adm_presence_stat table
+
+TODO:
+* Presence.WebHome: application entry point
+
 # Resources
 ===========
 ## Wifiscan.php
