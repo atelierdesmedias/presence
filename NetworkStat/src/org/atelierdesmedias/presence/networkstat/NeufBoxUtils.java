@@ -1,4 +1,4 @@
-package org.atelierdesmedias.networkstat;
+package org.atelierdesmedias.presence.networkstat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

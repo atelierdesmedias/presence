@@ -1,4 +1,4 @@
-package org.atelierdesmedias.networkstat;
+package org.atelierdesmedias.presence.networkstat;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
