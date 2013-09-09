@@ -27,15 +27,16 @@
         </activity>
 
         <service
-            android:name=".NetworkStatService"
+            android:name="org.atelierdesmedias.presence.networkstat.NetworkStatService"
             android:label="@string/service_name" >
             <intent-filter>
-                <action android:name="org.atelierdesmedias.networkstat.NetworkStatService" />
+                <action android:name="org.atelierdesmedias.presence.networkstat.NetworkStatService" />
             </intent-filter>
         </service>
 
+        <!-- Start scheduler on boot -->
         <receiver
-            android:name=".BootReceiver"
+            android:name="org.atelierdesmedias.presence.networkstat.BootReceiver"
             android:enabled="true"
             android:exported="true"
             android:label="BootReceiver" >
