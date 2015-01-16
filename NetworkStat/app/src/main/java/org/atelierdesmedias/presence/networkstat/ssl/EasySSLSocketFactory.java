@@ -63,7 +63,7 @@ public class EasySSLSocketFactory implements SocketFactory, LayeredSocketFactory
     }
  
     /**
-     * @see org.apache.http.conn.scheme.SocketFactory#connectSocket(java.net.Socket, java.lang.String, int,
+     * @see org.apache.http.conn.scheme.SocketFactory#connectSocket(java.net.Socket, String, int,
      *      java.net.InetAddress, int, org.apache.http.params.HttpParams)
      */
     public Socket connectSocket(Socket sock, String host, int port, InetAddress localAddress, int localPort,
@@ -103,7 +103,7 @@ public class EasySSLSocketFactory implements SocketFactory, LayeredSocketFactory
     }
  
     /**
-     * @see org.apache.http.conn.scheme.LayeredSocketFactory#createSocket(java.net.Socket, java.lang.String, int,
+     * @see org.apache.http.conn.scheme.LayeredSocketFactory#createSocket(java.net.Socket, String, int,
      *      boolean)
      */
     public Socket createSocket(Socket socket, String host, int port, boolean autoClose) throws IOException,

@@ -1,4 +1,33 @@
+# Eclipse
+##########
 .settings
-gen
-bin
 .project
+
+# Android Studio
+##########
+# Android
+local.properties
+bin/
+gen/
+# Gradle
+.gradle/
+build/
+# Intellij IDEA
+**/.idea/libraries
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+**/.idea/datasources.xml
+**/.idea/dataSources.ids
+
+# Misc
+##########
+
+# Mac OS X clutter
+*.DS_Store
+
+# Windows clutter
+Thumbs.db
+
+# Other
+*~
+
